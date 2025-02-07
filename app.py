@@ -31,7 +31,7 @@ def index():
 
     return render_template('index.html', cities=cities)
 
-@app.route('/output')
+@app.route('/output')   
 def output():
     global generated_html_output, processing_complete
     if processing_complete:
