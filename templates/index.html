@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>City HTML Generator</title>
+</head>
+<body>
+    <h1>City HTML Generator</h1>
+
+    <form method="POST">
+        <label for="city_name">Enter City Name:</label>
+        <input type="text" id="city_name" name="city_name" required>
+        <button type="submit">Generate HTML</button>
+    </form>
+
+    <div id="output">
+        {% if html_output %}
+            <h2>Generated HTML:</h2>
+            <div class="html-display">
+                {{ html_output | safe }}
+            </div>
+            <p><a href="/">Generate Another Report</a></p>  {% endif %}
+    </div>
+
+    <style>
+        .html-display {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            white-space: pre-wrap; /* Preserve formatting of HTML */
+            font-family: monospace; /* Optional: use monospace font for code-like output */
+            background-color: #212121; /* Optional: light background */
+        }
+    </style>
+
+</body>
+</html>
