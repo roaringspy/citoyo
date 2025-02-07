@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sustainable Urban Land Development</title>
-</head>
-<body>
-    <style>
+  <style>
         /* Reset and base styles */
 * {
     margin: 0;
@@ -315,6 +313,8 @@ body {
 }
 
     </style>
+</head>
+<body>
   <div class="app">
     <header>
       <div class="container header-content">
@@ -331,14 +331,13 @@ body {
           <div class="form-group">
             <label>
               <span>Select City</span>
-              <select id="citySelect" onchange="loadIframe()">
+              <select id="citySelect">
                 <option value="">Choose a city...</option>
-                <option value="templates/pune.html">Pune</option>
-                <option value="templates/ahmedabad.html">Ahmedabad</option>
-                <option value="templates/delhi.html">Delhi</option>
+                <option value="/static/pune.html">Pune</option>
+                <option value="/static/ahmedabad.html">Ahmedabad</option>
+                <option value="/static/delhi.html">Delhi</option>
               </select>
             </label>
-            
           </div>
           <button type="submit" id="generateBtn">
             Generate
@@ -357,12 +356,11 @@ body {
 
       <section id="output" class="output-section hidden">
         <div class="output-grid">
-
           <!-- Preview -->
           <div class="output-card">
             <h2>Preview</h2>
             <div class="preview-content">
-                <iframe id="previewTitle" src="templates/ahmedabad.html"></iframe>
+              <iframe id="previewTitle" src="" width="1105" height="500"></iframe>
             </div>
           </div>
         </div>
@@ -378,7 +376,7 @@ body {
           <div class="graphs-grid">
             <div class="graph-card">
               <h3>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="static/graph.png" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path>
                 </svg>
                 Daily Usage
@@ -420,22 +418,36 @@ body {
 
   <script>
     document.getElementById('cityForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const city = document.getElementById('citySelect').value;
-      if (!city) return;
+      e.preventDefault(); // Prevent actual form submission
+
+      const citySelect = document.getElementById('citySelect');
+      const city = citySelect.value;
+
+      if (!city) {
+        alert("Please select a city."); // Basic validation
+        return;
+      }
 
       // Show loader
       document.getElementById('loader').classList.remove('hidden');
       document.getElementById('output').classList.add('hidden');
 
-      // Generate HTML after delay
+      // Simulate loading and then update iframe
       setTimeout(() => {
-        const cityName = city.charAt(0).toUpperCase() + city.slice(1);
+        const iframe = document.getElementById('previewTitle');
+        iframe.src = city; // Set the iframe source
+          iframe.onload = () => {
+            // Hide loader and show output after iframe loads
+            document.getElementById('loader').classList.add('hidden');
+            document.getElementById('output').classList.remove('hidden');
+          };
 
-        // Hide loader and show output
-        document.getElementById('loader').classList.add('hidden');
-        document.getElementById('output').classList.remove('hidden');
-      }, 2000);
+          iframe.onerror = () => {
+            // Handle iframe load error (e.g., file not found)
+            document.getElementById('loader').classList.add('hidden');
+            alert("Failed to load city data.  Please check the file exists.");
+          };
+        }, 2000); // Simulated loading time
     });
   </script>
 </body>
