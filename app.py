@@ -1,63 +1,46 @@
 from flask import Flask, request, render_template, jsonify
-import subprocess
-import time  # For adding a delay
-import threading # For running script in background
+import threading
+import time
+import random
 
 app = Flask(__name__)
 
-# Global variable to store the generated HTML output
+# Global variables
 generated_html_output = None
-processing_complete = False # Flag to indicate processing status
+processing_complete = False
+input_params = {}
 
-def run_script_and_capture_output(city_name):
-    global generated_html_output, processing_complete
-    generated_html_output = None # Reset output
-    processing_complete = False # Reset flag
-    time.sleep(5) # Minimum 5 second delay - ensure loading page is visible
-    try:
-        process = subprocess.run(
-            ['python', 'your_script.py', city_name],
-            capture_output=True,
-            text=True,
-            check=True
-        )
-        generated_html_output = process.stdout
-    except subprocess.CalledProcessError as e:
-        generated_html_output = f"Error running script: {e}<br><pre>{e.stderr}</pre>"
-    except FileNotFoundError:
-        generated_html_output = "Error: Python script 'your_script.py' not found."
-    finally:
-        processing_complete = True # Mark processing as complete
-
+def run_script_and_capture_output():
+    global generated_html_output, processing_complete, input_params
+    city_name = input_params.get('city_name', 'Unknown City')
+    processing_complete = True
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    global generated_html_output, processing_complete
-    generated_html_output = None # Reset output when index page is loaded initially
-    processing_complete = False # Reset processing flag
+    global generated_html_output, processing_complete, input_params
+    cities = ["New York", "London", "Tokyo", "Paris", "Sydney"]  # Example cities
+
     if request.method == 'POST':
-        city_name = request.form['city_name']
+        input_params = {
+            'city_name': request.form['city_name']
+        }
+        generated_html_output = None
+        processing_complete = False
+        threading.Thread(target=run_script_and_capture_output).start()
+        return '', 204  # No content response, as we're using AJAX
 
-        # Start the script execution in a background thread
-        thread = threading.Thread(target=run_script_and_capture_output, args=(city_name,))
-        thread.start()
-
-        return render_template('loading.html') # Immediately render loading page
-
-    return render_template('index.html', html_output=None) # Initial page load
-
+    return render_template('index.html', cities=cities)
 
 @app.route('/output')
 def output():
     global generated_html_output, processing_complete
     if processing_complete:
         output_to_send = generated_html_output
-        generated_html_output = None # Clear output after sending once if you want to reset for next request. Remove if you want to keep the last output accessible.
-        processing_complete = False # Reset processing flag for next request. Remove if you want to keep it true.
+        generated_html_output = None
+        processing_complete = False
         return jsonify({'html_output': output_to_send})
     else:
-        return jsonify({'html_output': None}) # Not ready yet
-
+        return jsonify({'html_output': None})
 
 if __name__ == '__main__':
     app.run(debug=True)

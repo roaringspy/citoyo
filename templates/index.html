@@ -1,133 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>City HTML Generator</title>
-    <style>
-        /* Global Styles */
-        body {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        h1, h2 {
-            color: #ffffff;
-        }
-        a {
-            color: #a3e583;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Form Styling */
-        form {
-            background-color: #1e1e1e;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            max-width: 500px;
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        /* Text Input Styling */
-        .textInputWrapper {
-            position: relative;
-            width: 100%;
-            margin: 12px 0;
-            --accent-color: #a3e583;
-        }
-        .textInputWrapper:before,
-        .textInputWrapper:after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -1px;
-            pointer-events: none;
-        }
-        .textInputWrapper:before {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.42);
-        }
-        .textInputWrapper:after {
-            border-bottom: 2px solid var(--accent-color);
-            transform: scaleX(0);
-            transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-        }
-        .textInputWrapper:focus-within:after {
-            transform: scaleX(1);
-        }
-        .textInput {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-bottom: 1px solid transparent;
-            background-color: #252525;
-            color: #e8e8e8;
-            font-size: 14px;
-            border-radius: 5px;
-            transition: background-color 200ms ease;
-        }
-        .textInput:focus,
-        .textInput:active {
-            outline: none;
-            background-color: #353535;
-        }
-        .textInput::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Button Styling */
-        button {
-            background-color: #a3e583;
-            color: #121212;
-            border: none;
-            padding: 12px 20px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 200ms ease;
-        }
-        button:hover {
-            background-color: #8ac16b;
-        }
-
-        /* Output Area Styling */
-        .html-display {
-            background-color: #212121;
-            padding: 10px;
-            border: 1px solid #444;
-            margin-top: 10px;
-            white-space: pre-wrap;
-            font-family: monospace;
-            border-radius: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sustainable Urban Land Development</title>
 </head>
 <body>
-    <form method="POST">
-        <label for="city_name">Enter City Name:</label>
-        <div class="textInputWrapper">
-            <input placeholder="Type Here" type="text" class="textInput" id="city_name" name="city_name" required>
-        </div>
-        <button type="submit">Generate HTML</button>
-    </form>
+    <style>
+        /* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    color: #e5e7eb;
+    background-color: #111827;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  /* Header */
+  header {
+    border-bottom: 1px solid #1f2937;
+    background-color: #0f172a;
+    padding: 1.5rem 0;
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .icon {
+    color: #3b82f6;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Form Section */
+  .form-section {
+    margin: 2rem auto;
+    max-width: 28rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  label span {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #d1d5db;
+  }
+  
+  select {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+    color: #e5e7eb;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  }
+  
+  button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s;
+  }
+  
+  button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  /* Loader */
+  .loader-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(17, 24, 39, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+  }
+  
+  .loader-content {
+    text-align: center;
+    background-color: #1f2937;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 3px solid #3b82f6;
+    border-top-color: transparent;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loader-text {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .loader-subtext {
+    color: #9ca3af;
+  }
+  
+  /* Output Section */
+  .output-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .output-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .output-card {
+    background-color: #1f2937;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
+  
+  .output-card h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  pre {
+    background-color: #111827;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    overflow-x: auto;
+  }
+  
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875rem;
+    color: #d1d5db;
+  }
+  
+  .preview-content {
+    background-color: white;
+    color: #111827;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    min-height: 200px;
+  }
+  
+  /* Graphs Section */
+  .graphs-section h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .graphs-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .graphs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .graph-card {
+    background-color: #1f2937;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
+  
+  .graph-card h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .graph-card svg {
+    color: currentColor;
+  }
+  
+  .graph-placeholder {
+    aspect-ratio: 16/9;
+    background-color: #111827;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+  }
+  
+  /* Utility Classes */
+  .hidden {
+    display: none;
+  }
+    </style>
+  <div class="app">
+    <header>
+      <div class="container header-content">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+          <path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path>
+        </svg>
+        <h1>City HTML Generator</h1>
+      </div>
+    </header>
 
-    <div id="output">
-        {% if html_output %}
-            <h2>Generated HTML:</h2>
-            <div class="html-display">
-                {{ html_output | safe }}
+    <main class="container">
+      <section class="form-section">
+        <form id="cityForm">
+          <div class="form-group">
+            <label>
+              <span>Select City</span>
+              <select id="citySelect" required>
+                <option value="">Choose a city...</option>
+                <option value="pune">Pune</option>
+                <option value="ahmedabad">Ahmedabad</option>
+                <option value="delhi">Delhi</option>
+              </select>
+            </label>
+          </div>
+          <button type="submit" id="generateBtn">
+            Generate HTML
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </button>
+        </form>
+      </section>
+
+      <div id="loader" class="loader-overlay hidden">
+        <div class="loader-content">
+          <div class="spinner"></div>
+          <p class="loader-text">Generating City Data...</p>
+          <p class="loader-subtext">This will just take a moment</p>
+        </div>
+      </div>
+
+      <section id="output" class="output-section hidden">
+        <div class="output-grid">
+          <!-- HTML Code -->
+          <div class="output-card">
+            <h2>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path>
+              </svg>
+              Generated HTML
+            </h2>
+            <pre><code id="generatedCode"></code></pre>
+          </div>
+
+          <!-- Preview -->
+          <div class="output-card">
+            <h2>Preview</h2>
+            <div class="preview-content">
+              <h1 id="previewTitle"></h1>
             </div>
-            <p><a href="/">Generate Another Report</a></p>
-        {% endif %}
-    </div>
+          </div>
+        </div>
+
+        <!-- Graphs Section -->
+        <section class="graphs-section">
+          <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path>
+            </svg>
+            Electricity Usage Analytics
+          </h2>
+          <div class="graphs-grid">
+            <div class="graph-card">
+              <h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path>
+                </svg>
+                Daily Usage
+              </h3>
+              <div class="graph-placeholder">Daily usage graph visualization</div>
+            </div>
+            <div class="graph-card">
+              <h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12h12"></path><path d="M6 7h12"></path><path d="M6 17h12"></path>
+                </svg>
+                Peak Hours
+              </h3>
+              <div class="graph-placeholder">Peak hours graph visualization</div>
+            </div>
+            <div class="graph-card">
+              <h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path>
+                </svg>
+                Monthly Trends
+              </h3>
+              <div class="graph-placeholder">Monthly trends graph visualization</div>
+            </div>
+            <div class="graph-card">
+              <h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path>
+                </svg>
+                Usage by Sector
+              </h3>
+              <div class="graph-placeholder">Sector-wise usage graph visualization</div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('cityForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const city = document.getElementById('citySelect').value;
+      if (!city) return;
+
+      // Show loader
+      document.getElementById('loader').classList.remove('hidden');
+      document.getElementById('output').classList.add('hidden');
+
+      // Generate HTML after delay
+      setTimeout(() => {
+        const cityName = city.charAt(0).toUpperCase() + city.slice(1);
+        
+        // Update code preview
+        document.getElementById('generatedCode').textContent = "urban_planning_map.html";
+        // Update preview
+        document.getElementById('previewTitle').textContent = `Welcome to ${cityName}`;
+
+        // Hide loader and show output
+        document.getElementById('loader').classList.add('hidden');
+        document.getElementById('output').classList.remove('hidden');
+      }, 2000);
+    });
+  </script>
 </body>
 </html>

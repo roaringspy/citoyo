@@ -1,17 +1,6 @@
 import sys
 
 def get_city_population_html(city_name):
-    """
-    Generates a simple HTML string containing the city name and its population.
-    For demonstration purposes, population data is hardcoded.
-
-    Args:
-        city_name: The name of the city (string).
-
-    Returns:
-        A string containing HTML, or an error message in HTML if city is not found.
-    """
-
     city_populations = {
         "London": "9,000,000",
         "Paris": "2,100,000",
@@ -30,8 +19,7 @@ def get_city_population_html(city_name):
         </head>
         <body>
             <h1>Population of {city_name}</h1>
-            <p>The approximate population of {city_name} is: <strong>{population}</strong>.</p>
-            <p><small><i>(Note: This data is for demonstration purposes only and may not be accurate.)</i></small></p>
+            <p>The population of {city_name} is: <strong>{population}</strong>.</p>
         </body>
         </html>
         """

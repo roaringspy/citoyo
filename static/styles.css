@@ -1,0 +1,244 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    color: #e5e7eb;
+    background-color: #111827;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  /* Header */
+  header {
+    border-bottom: 1px solid #1f2937;
+    background-color: #0f172a;
+    padding: 1.5rem 0;
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .icon {
+    color: #3b82f6;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Form Section */
+  .form-section {
+    margin: 2rem auto;
+    max-width: 28rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  label span {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #d1d5db;
+  }
+  
+  select {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+    color: #e5e7eb;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  }
+  
+  button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s;
+  }
+  
+  button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  /* Loader */
+  .loader-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(17, 24, 39, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+  }
+  
+  .loader-content {
+    text-align: center;
+    background-color: #1f2937;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 3px solid #3b82f6;
+    border-top-color: transparent;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loader-text {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .loader-subtext {
+    color: #9ca3af;
+  }
+  
+  /* Output Section */
+  .output-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .output-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .output-card {
+    background-color: #1f2937;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
+  
+  .output-card h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  pre {
+    background-color: #111827;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    overflow-x: auto;
+  }
+  
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875rem;
+    color: #d1d5db;
+  }
+  
+  .preview-content {
+    background-color: white;
+    color: #111827;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    min-height: 200px;
+  }
+  
+  /* Graphs Section */
+  .graphs-section h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .graphs-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .graphs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .graph-card {
+    background-color: #1f2937;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
+  
+  .graph-card h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .graph-card svg {
+    color: currentColor;
+  }
+  
+  .graph-placeholder {
+    aspect-ratio: 16/9;
+    background-color: #111827;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+  }
+  
+  /* Utility Classes */
+  .hidden {
+    display: none;
+  }
