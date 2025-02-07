@@ -197,6 +197,13 @@
     min-height: 500px;
     min-width: 1105px;
   }
+
+  .previewTitle{
+    padding: 1rem;
+    border-radius: 0.375rem;
+    min-height: 500px;
+    min-width: 1105px;
+  }
   
   /* Graphs Section */
   .graphs-section h2 {
@@ -324,13 +331,14 @@ body {
           <div class="form-group">
             <label>
               <span>Select City</span>
-              <select id="citySelect">
+              <select id="citySelect" onchange="loadIframe()">
                 <option value="">Choose a city...</option>
-                <option value="pune">Pune</option>
-                <option value="ahmedabad.html">Ahmedabad</option>
-                <option value="delhi">Delhi</option>
+                <option value="templates/pune.html">Pune</option>
+                <option value="templates/ahmedabad.html">Ahmedabad</option>
+                <option value="templates/delhi.html">Delhi</option>
               </select>
             </label>
+            
           </div>
           <button type="submit" id="generateBtn">
             Generate
@@ -354,7 +362,7 @@ body {
           <div class="output-card">
             <h2>Preview</h2>
             <div class="preview-content">
-              <h1 id="previewTitle"></h1>
+                <iframe id="previewTitle" src="templates/ahmedabad.html"></iframe>
             </div>
           </div>
         </div>
@@ -411,12 +419,6 @@ body {
   </div>
 
   <script>
-    function goToCity() {
-            var city = document.getElementById("citySelect").value;
-            if (city) {
-                document.getElementById('previewTitle').value // Redirect to selected city's HTML page
-            }
-        }
     document.getElementById('cityForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const city = document.getElementById('citySelect').value;
