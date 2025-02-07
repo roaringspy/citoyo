@@ -17,16 +17,17 @@
 	</div>
 	<div class="spoke"></div>
 </div>
-<script>
-  setTimeout(function() {
-      window.location.href = "/index.html";
-  }, 3000);  // Redirect after 3 seconds
-</script>
 <style>
+  body{
+    background-color: black;
+  }
 /* From Uiverse.io by Nawsome */ 
 .wheel-and-hamster {
   --dur: 1s;
-  position: relative;
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   width: 12em;
   height: 12em;
   font-size: 14px;
