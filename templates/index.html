@@ -1,14 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>City HTML Generator</title>
+    <style>
+        /* Global Styles */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #ffffff;
+        }
+        a {
+            color: #a3e583;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Styling */
+        form {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Text Input Styling */
+        .textInputWrapper {
+            position: relative;
+            width: 100%;
+            margin: 12px 0;
+            --accent-color: #a3e583;
+        }
+        .textInputWrapper:before,
+        .textInputWrapper:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -1px;
+            pointer-events: none;
+        }
+        .textInputWrapper:before {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+        }
+        .textInputWrapper:after {
+            border-bottom: 2px solid var(--accent-color);
+            transform: scaleX(0);
+            transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+        }
+        .textInputWrapper:focus-within:after {
+            transform: scaleX(1);
+        }
+        .textInput {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-bottom: 1px solid transparent;
+            background-color: #252525;
+            color: #e8e8e8;
+            font-size: 14px;
+            border-radius: 5px;
+            transition: background-color 200ms ease;
+        }
+        .textInput:focus,
+        .textInput:active {
+            outline: none;
+            background-color: #353535;
+        }
+        .textInput::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #a3e583;
+            color: #121212;
+            border: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 200ms ease;
+        }
+        button:hover {
+            background-color: #8ac16b;
+        }
+
+        /* Output Area Styling */
+        .html-display {
+            background-color: #212121;
+            padding: 10px;
+            border: 1px solid #444;
+            margin-top: 10px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <h1>City HTML Generator</h1>
 
     <form method="POST">
         <label for="city_name">Enter City Name:</label>
-        <input type="text" id="city_name" name="city_name" required>
+        <div class="textInputWrapper">
+            <input placeholder="Type Here" type="text" class="textInput" id="city_name" name="city_name" required>
+        </div>
         <button type="submit">Generate HTML</button>
     </form>
 
@@ -18,19 +128,8 @@
             <div class="html-display">
                 {{ html_output | safe }}
             </div>
-            <p><a href="/">Generate Another Report</a></p>  {% endif %}
+            <p><a href="/">Generate Another Report</a></p>
+        {% endif %}
     </div>
-
-    <style>
-        .html-display {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 10px;
-            white-space: pre-wrap; /* Preserve formatting of HTML */
-            font-family: monospace; /* Optional: use monospace font for code-like output */
-            background-color: #212121; /* Optional: light background */
-        }
-    </style>
-
 </body>
 </html>
